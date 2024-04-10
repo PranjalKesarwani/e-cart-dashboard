@@ -5,6 +5,15 @@ export type RootStackParamList = {
   Home: undefined;
   Details: {title: string};
   Settings: undefined;
+  SplashScreen: undefined;
+  DashScreen:undefined;
+  DrawerNavigator: undefined;
 };
 
-export type DetailsScreenRouteProp = RouteProp<RootStackParamList, 'Details'>;
+export type RootDrawerParamList = {
+DashScreen:undefined;
+DrawerNavigator: undefined;
+
+
+ 
+};
