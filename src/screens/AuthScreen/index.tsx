@@ -4,30 +4,28 @@ import { NavigationProp } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../types/types';
 
-type SplashProps = NativeStackScreenProps<RootStackParamList, "SplashScreen">
+type AuthScreenProps = NativeStackScreenProps<RootStackParamList, "AuthScreen">
 
-const SplashScreen = ({ navigation }: SplashProps) => {
+const AuthScreen = ({ navigation }: AuthScreenProps) => {
 
-  const [isAuth, setIsAuth] = useState<boolean>(true);
 
-  setTimeout(()=>{
-    if(!isAuth)return navigation.replace("AuthScreen");
-    navigation.navigate("DrawerNavigator")
+  // setTimeout(()=>{
+  //   // if(!isAuth)return navigation.replace("LoginScreen");
+  //   navigation.navigate("DrawerNavigator")
 
-  },3000)
+  // },3000)
 
 
   return (
     <View style={styles.container}>
-      <Text>Welcome to Amazex</Text>
-      <Text>Authenticating User...</Text>
+      <Text>Authentication screen, this will contain signup and login screen</Text>
 
    
     </View>
   );
 };
 
-export default SplashScreen;
+export default AuthScreen;
 
 const styles = StyleSheet.create({
   container: {

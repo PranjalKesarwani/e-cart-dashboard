@@ -8,6 +8,7 @@ export type RootStackParamList = {
   SplashScreen: undefined;
   DashScreen:undefined;
   DrawerNavigator: undefined;
+  AuthScreen:undefined;
 };
 
 export type RootDrawerParamList = {

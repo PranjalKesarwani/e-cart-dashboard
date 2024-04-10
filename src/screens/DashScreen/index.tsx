@@ -13,8 +13,8 @@ const DashScreen = ({navigation}:DashScreenProps) => {
     <View style={styles.container} >
       <View style={styles.textContainer} >
 
-      <Text style={styles.textStyle}>List of shop Categories + Importat Contacts</Text>
-      <Text style={styles.textStyle}>e.g. Shoes, Watch, Cloth, Mats + Contacts of Potters, Kabadi waale, R.O. , AC, Electrician</Text>
+      <Text style={styles.textStyle}>Dash Screen</Text>
+      <Text style={styles.textStyle}>This screen will contain dashboard</Text>
       
       {/* <Button
       title='Go to ShopList Screen'
