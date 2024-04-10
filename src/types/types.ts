@@ -1,0 +1,10 @@
+import type {RouteProp} from '@react-navigation/native';
+
+export type RootStackParamList = {
+  Drawer: undefined;
+  Home: undefined;
+  Details: {title: string};
+  Settings: undefined;
+};
+
+export type DetailsScreenRouteProp = RouteProp<RootStackParamList, 'Details'>;
