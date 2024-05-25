@@ -22,7 +22,6 @@ const SplashScreen = ({ navigation }: SplashProps) => {
       <Text>Welcome to Amazex</Text>
       <Text>Authenticating User...</Text>
 
-   
     </View>
   );
 };
