@@ -12,7 +12,8 @@ export type RootStackParamList = {
   LoginScreen: undefined;
   SellerRegistrationScreen: undefined;
   DeliveryBoyLoginScreen: undefined;
-  OtpScreen: undefined;
+  OtpScreen: { phoneNumber: string };
+  NoticeBoardScreen: undefined;
 
 };
 
