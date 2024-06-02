@@ -8,14 +8,6 @@ type AuthScreenProps = NativeStackScreenProps<RootStackParamList, "AuthScreen">
 
 const AuthScreen = ({ navigation }: AuthScreenProps) => {
 
-
-  // setTimeout(()=>{
-  //   // if(!isAuth)return navigation.replace("LoginScreen");
-  //   navigation.navigate("DrawerNavigator")
-
-  // },3000)
-
-
   return (
     <View style={styles.container}>
       <Text>Authentication screen, this will contain signup and login screen</Text>
