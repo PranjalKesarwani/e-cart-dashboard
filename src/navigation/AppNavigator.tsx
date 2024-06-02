@@ -7,6 +7,7 @@ import Settings from '../screens/Settings';
 import SplashScreen from '../screens/SplashScreen';
 import DrawerNavigator from './DrawerNavigator';
 import AuthScreen from '../screens/AuthScreen';
+import LoginScreen from '../screens/LoginScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -18,6 +19,7 @@ const AppNavigator = () => {
       headerShown: false,
     }} initialRouteName='SplashScreen'>
       <Stack.Screen name='SplashScreen' component={SplashScreen} />
+      <Stack.Screen name='LoginScreen' component={LoginScreen} />
       <Stack.Screen name='AuthScreen' component={AuthScreen} />
  
     <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />

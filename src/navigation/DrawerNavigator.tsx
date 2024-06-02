@@ -14,6 +14,7 @@ import EditStockScreen from '../screens/EditStockScreen';
 import OrderHistoryScreen from '../screens/OrderHistoryScreen';
 import UploadProductScreen from '../screens/UploadProductScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import KhataScreen from '../screens/KhataScreen';
 
 const DrawerNavigator = () => {
   const Drawer = createDrawerNavigator<RootDrawerParamList>();
@@ -28,6 +29,7 @@ const DrawerNavigator = () => {
       <Drawer.Screen name="EditStockScreen" component={EditStockScreen} />
       <Drawer.Screen name="OrderHistoryScreen" component={OrderHistoryScreen} />
       <Drawer.Screen name="UploadProductScreen" component={UploadProductScreen}  />
+      <Drawer.Screen name="KhataScreen" component={KhataScreen}  />
       <Drawer.Screen name="SettingsScreen" component={SettingsScreen}  />
 
     </Drawer.Navigator>
