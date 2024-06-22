@@ -15,6 +15,7 @@ export type RootStackParamList = {
   OtpScreen: { phoneNumber: string };
   NoticeBoardScreen: undefined;
   AnalyticData: undefined;
+  ChatDetails:undefined;
 
 };
 
@@ -32,6 +33,7 @@ export type RootDrawerParamList = {
   UploadProductScreen: undefined;
   SettingsScreen: undefined;
   AnalyticData: undefined;
+  ChatDetails:undefined
 
 
 
