@@ -16,6 +16,8 @@ export type RootStackParamList = {
   NoticeBoardScreen: undefined;
   AnalyticData: undefined;
   ChatDetails:undefined;
+  DailyOrderDetails: undefined;
+
 
 };
 
@@ -33,7 +35,8 @@ export type RootDrawerParamList = {
   UploadProductScreen: undefined;
   SettingsScreen: undefined;
   AnalyticData: undefined;
-  ChatDetails:undefined
+  ChatDetails:undefined;
+  DailyOrderDetails: undefined;
 
 
 
