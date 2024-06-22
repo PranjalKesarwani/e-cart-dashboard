@@ -11,6 +11,7 @@ import LoginScreen from '../screens/LoginScreen';
 import SellerRegistrationScreen from '../screens/SellerRegistrationScreen';
 import OtpScreen from '../screens/OtpScreen';
 import NoticeBoardScreen from '../screens/NoticeBoardScreen';
+import AnalyticData from '../screens/AnalyticsScreen/AnalyticData';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -23,6 +24,8 @@ const AppNavigator = () => {
     }} initialRouteName='SplashScreen'>
       <Stack.Screen name='SplashScreen' component={SplashScreen} />
       <Stack.Screen name='LoginScreen' component={LoginScreen} />
+      <Stack.Screen name='AnalyticData' component={AnalyticData} />
+
       <Stack.Screen name='SellerRegistrationScreen' component={SellerRegistrationScreen} />
       <Stack.Screen name='OtpScreen' component={OtpScreen} />
       <Stack.Screen name='AuthScreen' component={AuthScreen} />

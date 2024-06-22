@@ -20,8 +20,8 @@ const DrawerNavigator = () => {
   const Drawer = createDrawerNavigator<RootDrawerParamList>();
   return (
     <Drawer.Navigator>
-      <Drawer.Screen name="DashScreen" component={DashScreen} />
       <Drawer.Screen name="AnalyticsScreen" component={AnalyticsScreen} />
+      <Drawer.Screen name="DashScreen" component={DashScreen} />
       <Drawer.Screen name="ChatsScreen" component={ChatsScreen} />
       <Drawer.Screen name="CreateTemplatesScreen" component={CreateTemplatesScreen} />
       <Drawer.Screen name="DailyOrdersScreen" component={DailyOrdersScreen} />

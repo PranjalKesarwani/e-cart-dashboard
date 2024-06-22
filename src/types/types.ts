@@ -14,6 +14,7 @@ export type RootStackParamList = {
   DeliveryBoyLoginScreen: undefined;
   OtpScreen: { phoneNumber: string };
   NoticeBoardScreen: undefined;
+  AnalyticData: undefined;
 
 };
 
@@ -30,6 +31,8 @@ export type RootDrawerParamList = {
   OrderHistoryScreen: undefined;
   UploadProductScreen: undefined;
   SettingsScreen: undefined;
+  AnalyticData: undefined;
+
 
 
 
