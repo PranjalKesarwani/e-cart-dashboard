@@ -14,6 +14,7 @@ import NoticeBoardScreen from '../screens/NoticeBoardScreen';
 import AnalyticData from '../screens/AnalyticsScreen/AnalyticData';
 import ChatDetails from '../screens/ChatsScreen/ChatDetails';
 import DailyOrderDetails from '../screens/DailyOrdersScreen/DailyOrderDetails';
+import FillProduct from '../screens/UploadProductScreen/FillProduct';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -29,6 +30,7 @@ const AppNavigator = () => {
       <Stack.Screen name='AnalyticData' component={AnalyticData} />
       <Stack.Screen name='ChatDetails' component={ChatDetails} />
       <Stack.Screen name='DailyOrderDetails' component={DailyOrderDetails} />
+      <Stack.Screen name='FillProduct' component={FillProduct} />
 
       <Stack.Screen name='SellerRegistrationScreen' component={SellerRegistrationScreen} />
       <Stack.Screen name='OtpScreen' component={OtpScreen} />
