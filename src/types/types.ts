@@ -18,6 +18,8 @@ export type RootStackParamList = {
   ChatDetails:undefined;
   DailyOrderDetails: undefined;
   FillProduct: undefined;
+  DeliveryPolicy: undefined;
+
 
 
 };
@@ -39,6 +41,7 @@ export type RootDrawerParamList = {
   ChatDetails:undefined;
   DailyOrderDetails: undefined;
   FillProduct: undefined;
+  DeliveryPolicy: undefined;
 
 
 

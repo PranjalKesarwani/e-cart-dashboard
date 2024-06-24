@@ -15,6 +15,7 @@ import AnalyticData from '../screens/AnalyticsScreen/AnalyticData';
 import ChatDetails from '../screens/ChatsScreen/ChatDetails';
 import DailyOrderDetails from '../screens/DailyOrdersScreen/DailyOrderDetails';
 import FillProduct from '../screens/UploadProductScreen/FillProduct';
+import DeliveryPolicy from '../screens/SettingsScreen/DeliveryPolicy';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -31,6 +32,7 @@ const AppNavigator = () => {
       <Stack.Screen name='ChatDetails' component={ChatDetails} />
       <Stack.Screen name='DailyOrderDetails' component={DailyOrderDetails} />
       <Stack.Screen name='FillProduct' component={FillProduct} />
+      <Stack.Screen name='DeliveryPolicy' component={DeliveryPolicy} />
 
       <Stack.Screen name='SellerRegistrationScreen' component={SellerRegistrationScreen} />
       <Stack.Screen name='OtpScreen' component={OtpScreen} />
