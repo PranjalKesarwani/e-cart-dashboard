@@ -1,71 +1,100 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView } from 'react-native';
-import { RootStackParamList } from '../../types/types'; 
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, Alert } from 'react-native';
+import { RootStackParamList } from '../../types/types';
 import Title from '../../components/Title';
+import { validateForm } from './helpers';
 
 type SellerRegistrationScreenProps = NativeStackScreenProps<RootStackParamList, "SellerRegistrationScreen">;
 
+export interface SellerForm {
+  sellerName: string;
+  shopName: string;
+  address: string;
+  landmark: string;
+  phoneNumber: string;
+  pincode: string;
+}
+
 const SellerRegistrationScreen = ({ navigation }: SellerRegistrationScreenProps) => {
-  const [sellerName, setSellerName] = useState('');
-  const [shopName, setShopName] = useState('');
-  const [address, setAddress] = useState('');
-  const [landmark, setLandmark] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [pincode, setPincode] = useState('');
-  const [shopTiming, setShopTiming] = useState('');
+
+  const emptyForm = {
+    sellerName: "",
+    shopName: "",
+    address: "",
+    landmark: "",
+    phoneNumber: "",
+    pincode: ""
+  }
+
+  const [sellerForm, setSellerForm] = useState<SellerForm>(emptyForm);
+
+
+
+   
+  const handleRegistration = ()=>{
+
+    if (validateForm(sellerForm)) {
+      Alert.alert('Registration Successful', 'Your details have been registered.');
+    } else {
+      return;
+    }
+
+    // navigation.navigate("NoticeBoardScreen")
+  }
+
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Title fontSize={36} fontWeight={"bold"} />
       <Text style={styles.title}>Seller Registration</Text>
-      
+
       <TextInput
         style={styles.input}
         placeholder="Seller Name"
-        value={sellerName}
-        onChangeText={setSellerName}
+        value={sellerForm.sellerName}
+        onChangeText={(text) => setSellerForm({ ...sellerForm, sellerName: text })}
       />
 
       <TextInput
         style={styles.input}
         placeholder="Shop Name"
-        value={shopName}
-        onChangeText={setShopName}
+        value={sellerForm.shopName}
+        onChangeText={(text) => setSellerForm({ ...sellerForm, shopName: text })}
       />
 
       <TextInput
         style={styles.input}
         placeholder="Address"
-        value={address}
-        onChangeText={setAddress}
+        value={sellerForm.address}
+        onChangeText={(text) => setSellerForm({ ...sellerForm, address: text })}
       />
 
       <TextInput
         style={styles.input}
         placeholder="Landmark"
-        value={landmark}
-        onChangeText={setLandmark}
+        value={sellerForm.landmark}
+        onChangeText={(text) => setSellerForm({ ...sellerForm, landmark: text })}
       />
 
       <TextInput
         style={styles.input}
         placeholder="Phone Number"
         keyboardType="phone-pad"
-        value={phoneNumber}
-        onChangeText={setPhoneNumber}
+        value={sellerForm.phoneNumber}
+        onChangeText={(text) => setSellerForm({ ...sellerForm, phoneNumber: text })}
       />
 
       <TextInput
         style={styles.input}
         placeholder="Pincode"
         keyboardType="number-pad"
-        value={pincode}
-        onChangeText={setPincode}
+        value={sellerForm.pincode}
+        onChangeText={(text) => setSellerForm({ ...sellerForm, pincode: text })}
       />
 
 
-      <TouchableOpacity style={styles.button} onPress={() => { navigation.navigate("NoticeBoardScreen") }}>
+      <TouchableOpacity style={styles.button} onPress={() => { handleRegistration() }}>
         <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>
     </ScrollView>
