@@ -4,7 +4,9 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, Alert 
 import { RootStackParamList } from '../../types/types';
 import Title from '../../components/Title';
 import { validateForm } from './helpers';
-
+import useAxios from '../../hooks/useApi';
+import axios from 'axios';
+import { apiUrl } from '../../helpers/url';
 type SellerRegistrationScreenProps = NativeStackScreenProps<RootStackParamList, "SellerRegistrationScreen">;
 
 export interface SellerForm {
@@ -17,6 +19,8 @@ export interface SellerForm {
 }
 
 const SellerRegistrationScreen = ({ navigation }: SellerRegistrationScreenProps) => {
+  const { response, error, loading, sendRequest } = useAxios<any>();
+
 
   const emptyForm = {
     sellerName: "",
@@ -32,15 +36,40 @@ const SellerRegistrationScreen = ({ navigation }: SellerRegistrationScreenProps)
 
 
    
-  const handleRegistration = ()=>{
+  const handleRegistration = async()=>{
 
     if (validateForm(sellerForm)) {
+
+      // sendRequest({
+      //   method: 'POST',
+      //   url: 'http://localhost:8000/auth/seller-signup',
+      //   data: {
+      //     sellerData: sellerForm,
+      //   },
+      // });
+      console.log("working")
+      // const res = await axios.post('http://localhost:8080/auth/seller-signup',{sellerForm});
+      const res = await axios.get('http://localhost:8000/testing');
+      console.log(res.data);
+      // console.log(response)
       Alert.alert('Registration Successful', 'Your details have been registered.');
     } else {
       return;
     }
 
-    // navigation.navigate("NoticeBoardScreen")
+    navigation.navigate("NoticeBoardScreen")
+  }
+
+  const testBtn = async ()=>{
+    console.log("testBtn")
+    try {
+      const res = await axios.get(`${apiUrl}/testing`);
+      console.log(res.data);
+    } catch (error) {
+      console.log("error occured by testing api", error)
+    }
+
+
   }
 
 
@@ -94,7 +123,7 @@ const SellerRegistrationScreen = ({ navigation }: SellerRegistrationScreenProps)
       />
 
 
-      <TouchableOpacity style={styles.button} onPress={() => { handleRegistration() }}>
+      <TouchableOpacity style={styles.button} onPress={() => { testBtn() }}>
         <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>
     </ScrollView>
