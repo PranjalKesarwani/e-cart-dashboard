@@ -6,7 +6,7 @@ interface RequestConfig extends AxiosRequestConfig {
 }
 
 const useAxios = <T,>() => {
-  const [response, setResponse] = useState<AxiosResponse<T> | null>(null);
+  const [res, setRes] = useState<AxiosResponse<T> | null>(null);
   const [error, setError] = useState<AxiosError | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -17,7 +17,7 @@ const useAxios = <T,>() => {
       setError(null);
       try {
         const res = await axios(config);
-        setResponse(res);
+        setRes(res);
       } catch (err) {
         setError(err as AxiosError);
       } finally {
@@ -27,7 +27,7 @@ const useAxios = <T,>() => {
     []
   );
 
-  return { response, error, loading, sendRequest };
+  return { res, error, loading, sendRequest };
 };
 
 export default useAxios;

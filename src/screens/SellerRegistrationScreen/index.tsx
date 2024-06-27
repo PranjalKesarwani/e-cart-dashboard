@@ -19,7 +19,7 @@ export interface SellerForm {
 }
 
 const SellerRegistrationScreen = ({ navigation }: SellerRegistrationScreenProps) => {
-  const { response, error, loading, sendRequest } = useAxios<any>();
+  const { res, error, loading, sendRequest } = useAxios<any>();
 
 
   const emptyForm = {
@@ -32,6 +32,7 @@ const SellerRegistrationScreen = ({ navigation }: SellerRegistrationScreenProps)
   }
 
   const [sellerForm, setSellerForm] = useState<SellerForm>(emptyForm);
+  
 
 
 
@@ -40,37 +41,45 @@ const SellerRegistrationScreen = ({ navigation }: SellerRegistrationScreenProps)
 
     if (validateForm(sellerForm)) {
 
-      // sendRequest({
-      //   method: 'POST',
-      //   url: 'http://localhost:8000/auth/seller-signup',
-      //   data: {
-      //     sellerData: sellerForm,
-      //   },
-      // });
+      sendRequest({
+        method: 'POST',
+        url: `${apiUrl}/auth/seller-signup`,
+        data: sellerForm,
+      });
       console.log("working")
-      // const res = await axios.post('http://localhost:8080/auth/seller-signup',{sellerForm});
-      const res = await axios.get('http://localhost:8000/testing');
-      console.log(res.data);
-      // console.log(response)
-      Alert.alert('Registration Successful', 'Your details have been registered.');
+      if(res?.status === 201){
+        
+        console.log(res.status);
+      }
+      if(res?.status === 200){
+        let data = res.data;
+
+        // Check if the data is a string and needs to be parsed
+        if (typeof data === 'string') {
+          data = JSON.parse(data);
+        }
+        console.log("Data already created!", data)
+      }
+
+    navigation.navigate("NoticeBoardScreen")
+
     } else {
       return;
     }
 
-    navigation.navigate("NoticeBoardScreen")
   }
 
-  const testBtn = async ()=>{
-    console.log("testBtn")
-    try {
-      const res = await axios.get(`${apiUrl}/testing`);
-      console.log(res.data);
-    } catch (error) {
-      console.log("error occured by testing api", error)
-    }
+  // const testBtn = async ()=>{
+  //   console.log("testBtn")
+  //   try {
+  //     const res = await axios.get(`${apiUrl}/testing`);
+  //     console.log(res.data);
+  //   } catch (error) {
+  //     console.log("error occured by testing api", error)
+  //   }
 
 
-  }
+  // }
 
 
   return (
@@ -123,7 +132,7 @@ const SellerRegistrationScreen = ({ navigation }: SellerRegistrationScreenProps)
       />
 
 
-      <TouchableOpacity style={styles.button} onPress={() => { testBtn() }}>
+      <TouchableOpacity style={styles.button} onPress={() => { handleRegistration() }}>
         <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>
     </ScrollView>
