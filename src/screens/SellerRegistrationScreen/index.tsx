@@ -32,6 +32,9 @@ const SellerRegistrationScreen = ({ navigation }: SellerRegistrationScreenProps)
   const [sellerForm, setSellerForm] = useState<SellerForm>(emptyForm);
 
   const handleRegistration = async () => {
+    if(!validateForm(sellerForm)){
+      return;
+    }
 
     try {
       console.log("working 1");
@@ -46,9 +49,48 @@ const SellerRegistrationScreen = ({ navigation }: SellerRegistrationScreenProps)
       console.log(error);
     }
 
-   
+    // if (validateForm(sellerForm)) {
+
+    // sendRequest({
+    //   method: 'POST',
+    //   url: `${apiUrl}/auth/seller-signup`,
+    //   data: sellerForm,
+    // });
+    // console.log("testing 1")
+    //       const res = await axios.post(`${apiUrl}/auth/seller-signup`,sellerForm);
+    //       console.log("testing 2")
+    //       console.log(res.data);
+    // if(res?.status === 201){
+    //   let data = res.data;
+
+
+    //   console.log("Data created!", data)
+    // }
+    // if(res?.status === 200){
+    //   let data = res.data;
+
+    //   console.log("Data already created!", data)
+    // }
+
+
+
+    // } else {
+    // return;
+    // }
 
   }
+
+  // const testBtn = async ()=>{
+  //   console.log("testBtn")
+  //   try {
+  //     const res = await axios.get(`${apiUrl}/testing`);
+  //     console.log(res.data);
+  //   } catch (error) {
+  //     console.log("error occured by testing api", error)
+  //   }
+
+
+  // }
 
 
   return (
