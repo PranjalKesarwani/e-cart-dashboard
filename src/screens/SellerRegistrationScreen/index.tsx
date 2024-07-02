@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, Alert 
 import { RootStackParamList } from '../../types/types';
 import Title from '../../components/Title';
 import { validateForm } from './helpers';
-import useAxios from '../../hooks/useApi';
+import useApi from '../../hooks/useApi';
 import axios from 'axios';
 import { apiUrl } from '../../helpers/url';
 type SellerRegistrationScreenProps = NativeStackScreenProps<RootStackParamList, "SellerRegistrationScreen">;
@@ -19,9 +19,7 @@ export interface SellerForm {
 }
 
 const SellerRegistrationScreen = ({ navigation }: SellerRegistrationScreenProps) => {
-  const { res, error, loading, sendRequest } = useAxios<any>();
-
-
+  const { data, error, isLoading, sendRequest } = useApi<any>();
   const emptyForm = {
     sellerName: "",
     shopName: "",
@@ -32,54 +30,25 @@ const SellerRegistrationScreen = ({ navigation }: SellerRegistrationScreenProps)
   }
 
   const [sellerForm, setSellerForm] = useState<SellerForm>(emptyForm);
-  
 
+  const handleRegistration = async () => {
 
+    try {
+      console.log("working 1");
+      await sendRequest('POST', `${apiUrl}/auth/seller-signup`, sellerForm);
 
-   
-  const handleRegistration = async()=>{
+      console.log("working 2");
 
-    if (validateForm(sellerForm)) {
+      console.log("--xx--xx", data.sellerName);
+      navigation.navigate("NoticeBoardScreen")
 
-      sendRequest({
-        method: 'POST',
-        url: `${apiUrl}/auth/seller-signup`,
-        data: sellerForm,
-      });
-      console.log("working")
-      if(res?.status === 201){
-        
-        console.log(res.status);
-      }
-      if(res?.status === 200){
-        let data = res.data;
-
-        // Check if the data is a string and needs to be parsed
-        if (typeof data === 'string') {
-          data = JSON.parse(data);
-        }
-        console.log("Data already created!", data)
-      }
-
-    navigation.navigate("NoticeBoardScreen")
-
-    } else {
-      return;
+    } catch (error) {
+      console.log(error);
     }
 
+   
+
   }
-
-  // const testBtn = async ()=>{
-  //   console.log("testBtn")
-  //   try {
-  //     const res = await axios.get(`${apiUrl}/testing`);
-  //     console.log(res.data);
-  //   } catch (error) {
-  //     console.log("error occured by testing api", error)
-  //   }
-
-
-  // }
 
 
   return (
