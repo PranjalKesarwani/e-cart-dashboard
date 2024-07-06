@@ -1,20 +1,47 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { RootStackParamList } from '../../types/types';
 import Title from '../../components/Title';
 import SellerRegistrationScreen from '../SellerRegistrationScreen';
+import useApi from '../../hooks/useApi';
+import { apiUrl } from '../../helpers/url';
 
 type LoginScreenProps = NativeStackScreenProps<RootStackParamList, "LoginScreen">;
 
 const LoginScreen = ({ navigation }: LoginScreenProps) => {
   const [role, setRole] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const { data,  sendRequest, statusCode } = useApi<any>();
 
-  const handleSendOtp = ()=>{
-    console.log("handle send otp")
-    navigation.navigate('OtpScreen', { phoneNumber });
+
+  const handleSendOtp = async()=>{
+    console.log("handle send otp",role);
+    if(role === "" || phoneNumber.length !=10){
+      Alert.alert("Please select role or fix phone number");
+      return;
+    }
+
+    
+    try {
+      await sendRequest('POST', `${apiUrl}/auth/seller-login`,{phoneNumber,role});
+      console.log("data",statusCode);
+      if(statusCode === 200){
+        Alert.alert("OTP sent successfully");
+        console.log("login successful, here is data:", data)
+        navigation.navigate('OtpScreen', { phoneNumber });
+      }
+      if(statusCode === 203){
+       Alert.alert("Your request is in process!! please wait...");
+      }
+      if(statusCode === 404){
+        Alert.alert( 'Account does not exist! For issue, contact: 9982520785');
+      }
+      
+    } catch (error) {
+      console.log(error)
+    }
 
   }
 

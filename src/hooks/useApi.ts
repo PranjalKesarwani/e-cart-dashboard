@@ -1,37 +1,3 @@
-// import { useState, useEffect, useCallback } from 'react';
-// import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
-
-// interface RequestConfig extends AxiosRequestConfig {
-//   skip?: boolean; // Custom option to skip the request
-// }
-
-// const useAxios = <T,>() => {
-//   const [res, setRes] = useState<AxiosResponse<T> | null>(null);
-//   const [error, setError] = useState<AxiosError | null>(null);
-//   const [loading, setLoading] = useState<boolean>(false);
-
-//   const sendRequest = useCallback(
-//     async (config: RequestConfig) => {
-//       if (config.skip) return;
-//       setLoading(true);
-//       setError(null);
-//       try {
-//         const res = await axios(config);
-//         setRes(res);
-//       } catch (err) {
-//         setError(err as AxiosError);
-//       } finally {
-//         setLoading(false);
-//       }
-//     },
-//     []
-//   );
-
-//   return { res, error, loading, sendRequest };
-// };
-
-// export default useAxios;
-
 
 import { useState } from 'react';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
@@ -43,12 +9,14 @@ interface ApiResponse<T> {
   error: string | null;
   isLoading: boolean;
   sendRequest: (method: RequestMethod, url: string, data?: any, config?: AxiosRequestConfig) => Promise<void>;
+  statusCode: Number;
 }
 
 function useApi<T>(): ApiResponse<T> {
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [statusCode, setStatusCode] = useState<Number>(200);
 
   const sendRequest = async (method: RequestMethod, url: string, data?: any, config?: AxiosRequestConfig): Promise<void> => {
     setIsLoading(true);
@@ -75,14 +43,18 @@ function useApi<T>(): ApiResponse<T> {
       }
 
       setData(response.data);
+      if(response.status){
+        setStatusCode(response.status);
+      }
     } catch (err:any) {
       setError(err.message);
+      setStatusCode(err.response.status);
     } finally {
       setIsLoading(false);
     }
   };
 
-  return { data, error, isLoading, sendRequest };
+  return { data, error, isLoading, sendRequest,statusCode };
 }
 
 export default useApi;

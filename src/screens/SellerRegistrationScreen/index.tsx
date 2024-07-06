@@ -7,6 +7,7 @@ import { validateForm } from './helpers';
 import useApi from '../../hooks/useApi';
 import axios from 'axios';
 import { apiUrl } from '../../helpers/url';
+
 type SellerRegistrationScreenProps = NativeStackScreenProps<RootStackParamList, "SellerRegistrationScreen">;
 
 export interface SellerForm {
@@ -40,13 +41,11 @@ const SellerRegistrationScreen = ({ navigation }: SellerRegistrationScreenProps)
       console.log("working 1");
       await sendRequest('POST', `${apiUrl}/auth/seller-signup`, sellerForm);
 
-      console.log("working 2");
-
-      console.log("--xx--xx", data.sellerName);
+      console.log("--xx--xx", data);
       navigation.navigate("NoticeBoardScreen")
 
-    } catch (error) {
-      console.log(error);
+    } catch (error:any) {
+      console.log(error.message);
     }
 
     // if (validateForm(sellerForm)) {
