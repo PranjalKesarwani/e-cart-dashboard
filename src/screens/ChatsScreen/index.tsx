@@ -1,7 +1,9 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, PermissionsAndroid } from 'react-native';
 import { RootDrawerParamList } from '../../types/types';
+import Geolocation from 'react-native-geolocation-service';
+
 
 type ChatsScreenProps = NativeStackScreenProps<RootDrawerParamList, "ChatsScreen">;
 
@@ -109,6 +111,56 @@ const mockChats = [
 
 
 const ChatsScreen = ({ navigation }: ChatsScreenProps) => {
+
+
+  const [location, setLocation] = useState<any>(null);
+  const [hasLocation, setHasLocation] = useState<any>(false);
+
+
+
+  const checkLocation = async () => {
+    try {
+      console.log("check locatoin try block")
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        {
+          title: 'Geolocation Permission',
+          message: 'Can we access your location? ',
+          buttonNeutral: 'Ask Me Later',
+          buttonNegative: 'Cancel',
+          buttonPositive: 'OK',
+        },
+      );
+      if (granted === 'granted') {
+        Geolocation.getCurrentPosition(
+          position => {
+            setLocation(position);
+            setHasLocation(true);
+          },
+          error => {
+            console.log(error);
+          },
+          { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
+        );
+      }
+    } catch (err) {
+      console.log("check locatoin catch block")
+
+      console.log(err);
+    }
+  };
+
+  const storeLocation = async () => {
+    if (hasLocation) {
+      try {
+       console.log("called location api and stored the users location")
+        // });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
   const renderItem = ({ item }: { item: typeof mockChats[0] }) => (
     <TouchableOpacity style={styles.chatItem} onPress={() => navigation.navigate("ChatDetails")}>
       <Image source={{ uri: item.avatar }} style={styles.avatar} />
@@ -121,6 +173,11 @@ const ChatsScreen = ({ navigation }: ChatsScreenProps) => {
       </View>
     </TouchableOpacity>
   );
+
+  useEffect(() => {
+    console.log("use effect called for first render")
+    checkLocation();
+  }, []);
 
   return (
     <View style={styles.container}>
