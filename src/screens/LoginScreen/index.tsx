@@ -17,6 +17,8 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
 
 
   const handleSendOtp = async()=>{
+    navigation.navigate("DrawerNavigator")
+    return;
     console.log("handle send otp",role);
     if(role === "" || phoneNumber.length !=10){
       Alert.alert("Please select role or fix phone number");

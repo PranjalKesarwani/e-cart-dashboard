@@ -136,6 +136,7 @@ const ChatsScreen = ({ navigation }: ChatsScreenProps) => {
           position => {
             setLocation(position);
             setHasLocation(true);
+            console.log("----",position);
           },
           error => {
             console.log(error);
